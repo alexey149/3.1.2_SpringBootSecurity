@@ -14,7 +14,6 @@ public class UserServiceImp implements UserService {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
 
-
     public UserServiceImp(UserDao userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
@@ -31,18 +30,17 @@ public class UserServiceImp implements UserService {
     public User getUserById(int id) {
         return userDao.getUserById(id);
     }
-
     @Override
     @Transactional
     public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // шифруем пароль здесь
         userDao.save(user);
     }
 
     @Override
     @Transactional
     public void update(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // тоже шифрование
         userDao.update(user);
     }
 
